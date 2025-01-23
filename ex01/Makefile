@@ -10,7 +10,7 @@
 # /*                                                                            */
 # /* ************************************************************************** */
 
-NAME = container
+NAME = span
 
 CC = c++
 
@@ -27,6 +27,7 @@ vpath %.d $(DEP_DIR)
 
 
 FILES =	main.cpp\
+		Span.cpp
 
 
 SRC = $(addprefix $(SRC_DIR)/, $(FILES))
@@ -34,7 +35,7 @@ OBJ =	$(addprefix $(OBJ_DIR)/, $(FILES:%.cpp=%.o))
 
 DEP:= $(OBJ:.o=.d)
 DEPFLAGS = -MMD -MP
-FLAGS = -Wall -Wextra -Werror -std=c++17
+FLAGS = -Wall -Wextra -Werror -std=c++17 -g
 INCLUDES = -I$(INC_DIR)
 
 all: $(NAME)
@@ -46,7 +47,7 @@ $(NAME):$(OBJ)
 
 $(OBJ_DIR)/%.o: %.cpp
 	@mkdir -p $(dir $@)
-	@$(CC) $(FLAGS) $(DEPFLAGS) $(INCLUDES) -c $< -o $@
+	@$(CC) $(FLAGS) $(DEPFLAGS) $(INCLUDES) -c $< -o $@ -g
 
 clean:
 	@rm -rf $(OBJ_DIR)
