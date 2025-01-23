@@ -9,7 +9,7 @@
 			"request": "launch",
 			"name": "Debug",
 			"program": "${workspaceFolder}/ex01/span",
-			"args": ["0"],
+			"args": [],
 			"cwd": "${workspaceFolder}/ex01"
 		}
 	]

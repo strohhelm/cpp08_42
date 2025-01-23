@@ -6,7 +6,7 @@
 /*   By: pstrohal <pstrohal@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:53:51 by pstrohal          #+#    #+#             */
-/*   Updated: 2025/01/23 15:06:49 by pstrohal         ###   ########.fr       */
+/*   Updated: 2025/01/23 17:04:33 by pstrohal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 Span::Span(unsigned int N)
 {
 	_max = N;
-	_maxValue = std::numeric_limits<int>::min();
 }
 
 Span& Span::operator=(const Span& src)
@@ -27,58 +26,56 @@ Span& Span::operator=(const Span& src)
 
 const char *Span::NoSpanException::what() const noexcept
 {
-	return ("There is no Span in these Numbers! either all are the same, or there is only one inside");
+	return ("There is no Span in these Numbers! All numbers are the same!");
+}
+const char *Span::NoSizeException::what() const noexcept
+{
+	return ("There is nothing in this container!");
 }
 const char *Span::SizeException::what() const noexcept
 {
-	return ("There is no more space in this container!");
+	return ("There is not enough space in this container!");
 }
 
 
 void Span::addNumber(int num)
 {
-	if (!_vec.size())
-	{
-		_maxValue = num;
-		_minValue = num;
-	}
 	if (_vec.size() + 1 > _max)
 		throw Span::SizeException();
 	_vec.push_back(num);
-	if (num > _maxValue)
-		_maxValue = num;
-	if (num < _minValue)
-		_minValue = num;
+}
+void Span::addNumber(std::vector<int>::iterator it1, std::vector<int>::iterator it2)
+{
+	if (it2 - it1 + _vec.size() > _max)
+		throw Span::SizeException();
+	_vec.insert(_vec.end(), it1, it2);
 }
 
 int	Span::shortestSpan(void)
 {
-	int min_span = _maxValue - _minValue;
-	if (_vec.size() <= 1)
-		throw Span::NoSpanException();
-	if (_maxValue > 10000000)
-		std::cout<<"sorting now!"<<std::endl;
-	std::sort(_vec.begin(), _vec.end());
-	if (_maxValue > 10000000)
-		std::cout<<"sorting finished!\nlooking for shortest span now!"<<std::endl;
-	for (auto it = _vec.begin(); it < _vec.end() - 1; it++)
-	{
-		if ((*(it + 1) - *it) != 0 && (*(it + 1) - *it) < min_span)
-			min_span = *(it + 1) - *it;
-	}
-	if (min_span == 0)
-		throw Span::NoSpanException();
-	return min_span;
+	sort_and_diff();
+	return _diff.front();
 }
 
-int	Span::longestSpan(void) const
+void Span::sort_and_diff(void)
 {
-	std::cout<<"\n{_maxValue: "<<_maxValue<<"\n_minValue: "<<_minValue<<"}"<<std::endl;
-	int span = _maxValue - _minValue;
-	span = span >= 0 ? span : -span;
-	if (!span)
+	if (_vec.size() <= 1)
 		throw Span::NoSpanException();
-	return(span);
+
+	std::sort(_vec.begin(), _vec.end());
+	_diff.resize(_vec.size());
+	std::adjacent_difference(_vec.begin(), _vec.end(), _diff.begin(), [](int a, int b){return std::abs(a - b);});
+	_diff[0] = 0;
+	_diff.erase(std::remove(_diff.begin(), _diff.end(), 0), _diff.end());
+	if (_diff.empty())
+		throw Span::NoSpanException();
+	std::sort(_diff.begin(), _diff.end());
+	return ;
+}
+int	Span::longestSpan(void)
+{
+	sort_and_diff();
+	return(_vec.back() - _vec.front());
 }
 
 

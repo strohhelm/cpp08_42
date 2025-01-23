@@ -6,7 +6,7 @@
 /*   By: pstrohal <pstrohal@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:25:11 by pstrohal          #+#    #+#             */
-/*   Updated: 2025/01/23 15:04:48 by pstrohal         ###   ########.fr       */
+/*   Updated: 2025/01/23 15:54:19 by pstrohal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <vector>
 #include <exception>
 #include <limits>
+#include <numeric>
 
 
 class Span 
@@ -30,20 +31,21 @@ class Span
 		Span& operator=(const Span& src);
 		
 		void addNumber(int num);
-		void fillSpan();
+		void addNumber(std::vector<int>::iterator it1, std::vector<int>::iterator it2);
 		int	shortestSpan(void);
-		int	longestSpan(void) const;
+		int	longestSpan(void);
 		
 		class NoSpanException : public std::exception
+		{const char *what() const noexcept override;};
+		class NoSizeException : public std::exception
 		{const char *what() const noexcept override;};
 		class SizeException : public std::exception
 		{const char *what() const noexcept override;};
 		
 	private:
 		std::vector<int>	_vec;
+		std::vector<int>	_diff;
 		unsigned int		_max;
-		int					_maxValue;
-		int					_minValue;
-		void				sort_and_diff(void);
+		void	sort_and_diff(void);
 };
 #endif

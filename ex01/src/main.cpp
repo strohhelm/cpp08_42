@@ -6,7 +6,7 @@
 /*   By: pstrohal <pstrohal@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:37:45 by pstrohal          #+#    #+#             */
-/*   Updated: 2025/01/23 14:39:46 by pstrohal         ###   ########.fr       */
+/*   Updated: 2025/01/23 16:57:02 by pstrohal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,14 +124,33 @@ int main(int argc, char** argv)
 		sp.addNumber(11);
 		std::cout << sp.shortestSpan() << std::endl;
 		std::cout << sp.longestSpan() << std::endl;
-
-
+		std::random_device				device;
+		std::mt19937					generator(device());
+		std::uniform_int_distribution<>	distribution(-800, 800);
+			
+		std::cout <<"\n\n======= NOW for the many number fill: =======\n"<<std::endl;
+		std::vector<int> tmp;
+		Span exmpl1(80);
+		Span exmpl2(70);
+		for (int i = 0; i < 80; i++)
+			tmp.push_back(distribution(generator));
+		try{
+			exmpl1.addNumber(tmp.begin(), tmp.end());
+			std::cout << "shortest Span: "<<exmpl1.shortestSpan() << std::endl;
+			std::cout << "longest Span: "<<exmpl1.longestSpan() << std::endl;
+		}
+		catch(std::exception& e){std::cout<<e.what();}
+		
+		try{
+			exmpl2.addNumber(tmp.begin(), tmp.end());
+			std::cout << exmpl2.shortestSpan() << std::endl;
+			std::cout << exmpl2.longestSpan() << std::endl;
+		}
+		catch(std::exception& e){std::cout<<e.what();}
+		
 		
 		std::cout <<"\n\n======= NOW for a not hardcoded test: =======\n"<<std::endl;
 		input_test();
-
-		
-		
 	}
 	std::cout <<"\n\n======= NOW for a random test: =======\n"<<std::endl;
 
