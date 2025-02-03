@@ -6,7 +6,7 @@
 /*   By: pstrohal <pstrohal@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 16:53:51 by pstrohal          #+#    #+#             */
-/*   Updated: 2025/01/23 17:04:33 by pstrohal         ###   ########.fr       */
+/*   Updated: 2025/01/24 18:03:34 by pstrohal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void Span::addNumber(std::vector<int>::iterator it1, std::vector<int>::iterator 
 int	Span::shortestSpan(void)
 {
 	sort_and_diff();
-	return _diff.front();
+	return _diff.front() + 1;
 }
 
 void Span::sort_and_diff(void)
@@ -65,10 +65,10 @@ void Span::sort_and_diff(void)
 	std::sort(_vec.begin(), _vec.end());
 	_diff.resize(_vec.size());
 	std::adjacent_difference(_vec.begin(), _vec.end(), _diff.begin(), [](int a, int b){return std::abs(a - b);});
-	_diff[0] = 0;
-	_diff.erase(std::remove(_diff.begin(), _diff.end(), 0), _diff.end());
-	if (_diff.empty())
-		throw Span::NoSpanException();
+	// _diff[0] = 0;
+	// _diff.erase(std::remove(_diff.begin(), _diff.end(), 0), _diff.end());
+	// if (_diff.empty())
+	// 	throw Span::NoSpanException();
 	std::sort(_diff.begin(), _diff.end());
 	return ;
 }
