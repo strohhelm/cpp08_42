@@ -6,7 +6,7 @@
 /*   By: pstrohal <pstrohal@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:28:12 by pstrohal          #+#    #+#             */
-/*   Updated: 2025/01/20 15:16:44 by pstrohal         ###   ########.fr       */
+/*   Updated: 2025/02/17 14:02:09 by pstrohal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 
 template<typename T>
-void easyfind(T container, int to_find)
+auto easyfind(T container, int to_find)
 {
 	auto occurrence = std::find(container.begin(), container.end(), to_find);
 	if(occurrence == container.end())
