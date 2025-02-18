@@ -6,7 +6,7 @@
 /*   By: pstrohal <pstrohal@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 12:28:12 by pstrohal          #+#    #+#             */
-/*   Updated: 2025/02/17 14:02:09 by pstrohal         ###   ########.fr       */
+/*   Updated: 2025/02/18 12:37:24 by pstrohal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 #define EASYFIND_HPP
 
 #include <algorithm>
-#include <unordered_set>
 #include <iterator>
-
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+#include <array>
+#include <deque>
+#include <random>
 
 template<typename T>
-auto easyfind(T container, int to_find)
+void easyfind(T container, int to_find)
 {
 	auto occurrence = std::find(container.begin(), container.end(), to_find);
 	if(occurrence == container.end())
