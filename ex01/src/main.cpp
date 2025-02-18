@@ -6,7 +6,7 @@
 /*   By: pstrohal <pstrohal@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:37:45 by pstrohal          #+#    #+#             */
-/*   Updated: 2025/02/18 14:46:11 by pstrohal         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:25:39 by pstrohal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,6 @@ int main(void)
 	for (int i = 0; i < 10; i++)
 		b.addNumber(50);
 	std::cout<<"shortest span: "<<b.shortestSpan()<<std::endl;
-	b.printi();
-	std::cout<<std::endl;
-	b.printv();
 	std::cout<<"longest Span: "<<b.longestSpan()<<std::endl;
 	try{b.addNumber(15);}
 	catch(std::exception &e)
