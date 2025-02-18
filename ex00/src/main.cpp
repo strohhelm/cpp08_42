@@ -6,7 +6,7 @@
 /*   By: pstrohal <pstrohal@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/20 13:36:09 by pstrohal          #+#    #+#             */
-/*   Updated: 2025/02/18 12:23:08 by pstrohal         ###   ########.fr       */
+/*   Updated: 2025/02/18 15:14:25 by pstrohal         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int main (void)
     std::mt19937 gen(rd());  // Mersenne Twister RNG
     std::uniform_int_distribution<int> dist(0, 1000);  // Range: 0 to 1000
 
-	std::cout<<"\n=========finding a number in a stack of 1000 random numbers between 0 nd 1000 ========]\n"<<std::endl;
+	std::cout<<"\n=========finding a number in an array of 1000 random numbers between 0 nd 1000 ========]\n"<<std::endl;
 	std::array<int, 800> rando;
 	for (auto i = 0; i < 800; i++)
 	{
